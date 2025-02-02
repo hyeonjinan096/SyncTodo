@@ -1,7 +1,7 @@
-package com.example.springjwt.jwt;
+package hello.synctodo.security.jwt;
 
-import com.example.springjwt.dto.CustomUserDetails;
-import com.example.springjwt.entity.UserEntity;
+import hello.synctodo.domain.User;
+import hello.synctodo.dto.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,19 +35,16 @@ public class JWTFilter extends OncePerRequestFilter {
             System.out.println("token null");
             filterChain.doFilter(request, response);
 
-            //조건이 해당되면 메소드 종료 (필수)
             return;
         }
 
         String token = authorization.split(" ")[1];
 
-        //토큰 소멸 시간 검증
         if (jwtUtil.isExpired(token)) {
 
             System.out.println("token expired");
             filterChain.doFilter(request, response);
 
-            //조건이 해당되면 메소드 종료 (필수)
             return;
         }
 
@@ -55,7 +52,13 @@ public class JWTFilter extends OncePerRequestFilter {
         String username = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
 
-        UserEntity userEntity = new UserEntity();
+        System.out.println(username);
+
+        if (username == null) {
+            throw new IllegalArgumentException("Username cannot be null");
+        }
+
+        User userEntity = new User();
         userEntity.setUsername(username);
         userEntity.setPassword("temppassword");
         userEntity.setRole(role);

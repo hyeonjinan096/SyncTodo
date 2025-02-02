@@ -1,4 +1,4 @@
-package domain;
+package hello.synctodo.domain;
 
 public enum FriendStatus {
     PENDING,

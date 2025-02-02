@@ -32,6 +32,7 @@ public class JoinService {
                 .username(username)
                 .password(bCryptPasswordEncoder.encode(password))
                 .email(email)
+                .role("USER")
                 .profileImageUrl(profileImageUrl)
                 .isDeleted(false)
                 .build();

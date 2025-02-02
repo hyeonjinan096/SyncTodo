@@ -1,11 +1,12 @@
-package domain;
+package hello.synctodo.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,10 +15,10 @@ public class Friend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
-    private String userId1;
-    private String userId2;
+    private Long userId1;
+    private Long userId2;
 
     @Enumerated(EnumType.STRING)
     private FriendStatus status;
